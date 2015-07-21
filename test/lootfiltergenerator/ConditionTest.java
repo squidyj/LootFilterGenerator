@@ -56,5 +56,23 @@ public class ConditionTest {
 	// TODO review the generated test code and remove the default call to fail.
 
     }
-    
+
+    /**
+     * Test of equals method, of class Condition.
+     */
+    @Test
+    public void testEquals() {
+	System.out.println("equals");
+	Condition a = new Condition(Target.ANY, Comparator.EQUAL, " ");
+	Condition b = new Condition(Target.ANY, Comparator.EQUAL, " ");
+	boolean expResult = true;
+	boolean result = a.equals(b);
+	assertEquals(expResult, result);
+	
+	b = new Condition(Target.ANY, Comparator.EQUAL, "");
+	expResult = false;
+	result = a.equals(b);
+	assertEquals(expResult, result);
+	// TODO review the generated test code and remove the default call to fail.
+    }
 }

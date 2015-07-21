@@ -5,6 +5,8 @@
  */
 package lootfiltergenerator;
 
+import java.util.Objects;
+
 /**
  *
  * @author Bruce
@@ -12,63 +14,19 @@ package lootfiltergenerator;
 public class Condition {
 
 
-    Target target;
-    Comparator comp;
-    String value;
+    private Target target;
+    private Comparator comp;
+    private String value;
      
     public Condition(Target t, Comparator c, String v) {
 	this.target = t;
 	this.comp = c;
 	this.value = v;
     }    
-
    
-    //should we throw an exception?
-    private String resolveTarget()
-    {
-	String out = "Invalid target selected.";
-	switch(target)
-	{
-	    case ITEMLEVEL: 
-		out = "ItemLevel ";
-		break;
-	    case DROPLEVEL: 
-		out = "DropLevel ";
-		break;
-	    case QUALITY: 
-		out = "Quality ";
-		break;
-	    case RARITY: 
-		out = "Rarity ";
-		break;
-	    case SOCKETS: 
-		out = "Sockets ";
-		break;
-	    case LINKEDSOCKETS: 
-		out = "LinkedSockets ";
-		break;
-	    case SOCKETGROUP: 
-		out = "SocketGroup ";
-		break;
-	    case HEIGHT: 
-		out = "Height ";
-		break;
-	    case WIDTH: 
-		out = "Width ";
-		break;
-	    case ANY:
-		out = "";
-		break;
-	    default:
-		System.out.println("ERROR");
-		break;
-	}
-	return out;
-    }
-    
     private boolean isIntegerTarget()
     {
-	switch(target)
+	switch(getTarget())
 	{
 	    case ANY:
 	    case RARITY:
@@ -79,39 +37,33 @@ public class Condition {
 		return true;
 	}
     }
-    
-    private String resolveComparator()
-    {
-	String out;
-	switch(comp)
-	{
-	    case LESSTHAN:
-		out = "<";
-		break;
-	    case LESSEQUAL:
-		out = "<=";
-		break;
-	    case EQUAL:
-		out = "=";
-		break;
-	    case GREATEREQUAL:
-		out = ">=";
-		break;
-	    case GREATERTHAN:
-		out = ">";
-		break;
-	    default:
-		out = "";
-		break;
-	}
-	return out;
-    }
-    
+  
     @Override
     public String toString() {
 	if(isIntegerTarget())
-	    return resolveTarget() + resolveComparator() + " " + value;
+	    return "" + getTarget() + getComp() + " " + getValue();
 	else
-	    return resolveTarget() + value;
+	    return "" + getTarget() + getValue();
     }
+
+    @Override
+    public boolean equals(Object other)
+    {
+	if((other == null) || !(other instanceof Condition))
+	    return false;
+	Condition b = (Condition)other;
+	return	b.getComp().equals(getComp()) &&
+		b.getTarget().equals(getTarget()) &&
+		b.getValue().equals(getValue());
+    }
+    
+    //Encapsulating fields here, allows for future modification of these mthods without disrupting other code
+    public Target getTarget() { return target; }
+    public void setTarget(Target target) { this.target = target; }
+
+    public Comparator getComp() { return comp; }
+    public void setComp(Comparator comp) { this.comp = comp; }
+
+    public String getValue() { return value; }   
+    public void setValue(String value) { this.value = value; }
 }
