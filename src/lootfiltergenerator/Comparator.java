@@ -10,35 +10,11 @@ package lootfiltergenerator;
  * @author Bruce
  */
 public enum Comparator {
-    LESSTHAN, LESSEQUAL, GREATERTHAN,
-    GREATEREQUAL, EQUAL;
-	
-    @Override
-    public String toString()
-    {
-	String out;
-	switch(this)
-	{
-	    case LESSTHAN:
-		out = "<";
-		break;
-	    case LESSEQUAL:
-		out = "<=";
-		break;
-	    case EQUAL:
-		out = "=";
-		break;
-	    case GREATEREQUAL:
-		out = ">=";
-		break;
-	    case GREATERTHAN:
-		out = ">";
-		break;
-	    default:
-		out = "";
-		break;
-	}
-	return out;
-    }
+    LESSTHAN("<"), LESSEQUAL("<="), GREATERTHAN(">"),
+    GREATEREQUAL(">="), EQUAL("=");
+    private final String name;
     
+    Comparator(String s) {name = s;}
+    @Override
+    public String toString() { return name; }    
 }

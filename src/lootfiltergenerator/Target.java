@@ -10,51 +10,22 @@ package lootfiltergenerator;
  * @author Bruce
  */
 public enum Target {
-    	ITEMLEVEL, DROPLEVEL, QUALITY,
-	RARITY, SOCKETS, LINKEDSOCKETS,
-	SOCKETGROUP, HEIGHT, WIDTH, ANY;
-
+    ITEMLEVEL("ItemLevel"), 
+    DROPLEVEL("Droplevel"), 
+    QUALITY("Quality"),
+    RARITY("Rarity"), 
+    SOCKETS("Sockets"), 
+    LINKEDSOCKETS("LinkedSockets"),
+    SOCKETGROUP("SocketGroup"), 
+    HEIGHT("Height"), 
+    WIDTH("Width"), 
+    ANY("");
+    
+    private final String name;
+    
+    Target(String s) { name = s; }
+        
     @Override
-    public String toString()
-    {
-	String out = "Invalid target selected.";
-	switch(this)
-	{
-	    case ITEMLEVEL: 
-		out = "ItemLevel ";
-		break;
-	    case DROPLEVEL: 
-		out = "DropLevel ";
-		break;
-	    case QUALITY: 
-		out = "Quality ";
-		break;
-	    case RARITY: 
-		out = "Rarity ";
-		break;
-	    case SOCKETS: 
-		out = "Sockets ";
-		break;
-	    case LINKEDSOCKETS: 
-		out = "LinkedSockets ";
-		break;
-	    case SOCKETGROUP: 
-		out = "SocketGroup ";
-		break;
-	    case HEIGHT: 
-		out = "Height ";
-		break;
-	    case WIDTH: 
-		out = "Width ";
-		break;
-	    case ANY:
-		out = "";
-		break;
-	    default:
-		System.out.println("ERROR");
-		break;
-	}
-	return out;
-    }
+    public String toString(){ return name; }
 
 }

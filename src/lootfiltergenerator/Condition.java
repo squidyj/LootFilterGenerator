@@ -41,9 +41,9 @@ public class Condition {
     @Override
     public String toString() {
 	if(isIntegerTarget())
-	    return "" + getTarget() + getComp() + " " + getValue();
+	    return "" + getTarget() + " " + getComp() + " " + getValue();
 	else
-	    return "" + getTarget() + getValue();
+	    return "" + getTarget() + " " + getValue();
     }
 
     @Override
