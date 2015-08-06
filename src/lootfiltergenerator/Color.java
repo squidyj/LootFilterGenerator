@@ -22,6 +22,37 @@ public class Color
                 String.format("%03d ", b) + String.format("%03d", a);
     }
 
+    private int clamp(int in)
+    {
+        int out = in < 0 ? 0 : in;
+        out = out > 255 ? 255 : out;
+        return out;
+    }
+    
+    public static boolean equal(Object a, Object b)
+    {
+            if(a != null ^ b != null)
+                return false;
+            if(a == null)
+                return true;
+            if(!(a instanceof Color && b instanceof Color))
+                return false;
+            Color c = (Color)a;
+            return c.equals(b);
+    }
+    
+    @Override
+    public boolean equals(Object other)
+    {
+        if(other == null || !(other instanceof Color))
+            return false;
+        Color c = (Color)other;
+        return c.getR() == getR() &&
+               c.getG() == getG() &&
+               c.getB() == getB() &&
+               c.getA() == getA();
+    }
+    
     public final void setColor(int r, int g, int b, int a)    {
         setR(r); setG(g); setB(b); setA(a);
     }
@@ -31,8 +62,7 @@ public class Color
     }
 
     public void setR(int r) {
-        this.r = r > 255 ? 255 : r;
-        this.r = this.r < 0 ? 0 : this.r;
+        this.r = clamp(r);
     }
 
     public int getB() {
@@ -40,15 +70,15 @@ public class Color
     }
 
     public void setB(int b) {
-        this.b = b > 255 ? 255 : b;
-        this.b = this.b < 0 ? 0 : this.b;    }
+        this.b = clamp(b);
+    }
 
     public int getA() {
         return a;
     }
 
     public void setA(int a) {
-        this.a = a;
+        this.a = clamp(a);
     }
 
     public int getG() {
@@ -56,7 +86,7 @@ public class Color
     }
 
     public void setG(int g) {
-        this.g = g;
+        this.g = clamp(g);
     }
 
         

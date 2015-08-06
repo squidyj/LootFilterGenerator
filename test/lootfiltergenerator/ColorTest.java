@@ -68,6 +68,23 @@ public class ColorTest {
     }
     
     @Test
+    public void testEqual()
+    {
+        System.out.println("Static Equals");
+        Color c1 = null;
+        Color c2 = null;        
+        assertEquals(true, Color.equal(c1, c2));
+        
+        c1 = new Color(1,1,1,1);
+        c2 = new Color(1,1,1,1);
+        assertEquals(true, Color.equal(c1, c2));
+        
+        c1 = new Color(1,1,1,2);
+        assertEquals(false, Color.equal(c1, c2));
+        
+    }        
+    
+    @Test
     public void testSetColor() {
         System.out.println("setColor");
         Color instance = new Color(4, 5, 6, 7);
@@ -76,10 +93,14 @@ public class ColorTest {
         String result = instance.toString();
         assertEquals(expResult, result);
         
-        instance.setColor(-5, 0, 257, 4);
-        expResult = "000 000 255 004";
+        instance.setColor(-5, -5, -5, -5);
+        expResult = "000 000 000 000";
         result = instance.toString();
         assertEquals(expResult, result);
         
+        instance.setColor(555, 555, 555, 555);
+        expResult = "255 255 255 255";
+        result = instance.toString();
+        assertEquals(expResult, result);
     }
 }

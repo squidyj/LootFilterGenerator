@@ -9,6 +9,6 @@ package lootfiltergenerator;
  *
  * @author Bruce
  */
-public class FilterList {
+public class ItemClass {
     
 }
